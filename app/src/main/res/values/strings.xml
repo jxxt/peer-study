@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PeerStudy</string>
     <string name="peerstudy">PeerStudy</string>
+
+    <string name="default_web_client_id">118223018813-7m06vu3ftl40tmc7t26j76hnh912a8jp.apps.googleusercontent.com</string>
 </resources>

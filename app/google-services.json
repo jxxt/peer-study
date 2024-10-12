@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "118223018813",
+    "project_id": "peerstudy-53bae",
+    "storage_bucket": "peerstudy-53bae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118223018813:android:34d319f70483d60e230354",
+        "android_client_info": {
+          "package_name": "com.example.peerstudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118223018813-8sgmq3pedq0v230tb0uqginsvl13tt57.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.peerstudy",
+            "certificate_hash": "46ec0278e53dc0a07a677f306236c4b92d61288e"
+          }
+        },
+        {
+          "client_id": "118223018813-7m06vu3ftl40tmc7t26j76hnh912a8jp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7PkZqs0HmeqPscG0tyzZMlOWZZNge18E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118223018813-7m06vu3ftl40tmc7t26j76hnh912a8jp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
