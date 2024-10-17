@@ -96,14 +96,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            // Retrieve the user's display name from FirebaseUser
+            // Get user details
             String displayName = user.getDisplayName();
+            String email = user.getEmail();
+            String photoURL = String.valueOf(user.getPhotoUrl());
 
-            // Pass the display name to WelcomeActivity
+            // Create an Intent to go to WelcomeActivity
             Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-            intent.putExtra("USER_NAME", displayName);  // Send the name via Intent
+
+            // Pass individual user details through the intent
+            intent.putExtra("USER_NAME", displayName);
+            intent.putExtra("USER_EMAIL", email);
+            intent.putExtra("USER_PHOTO", photoURL);
+
+            // Start the WelcomeActivity
             startActivity(intent);
-            finish();  // Optional: Closes the sign-in activity
+            finish();
         }
     }
 
