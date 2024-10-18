@@ -1,6 +1,8 @@
 package com.example.peerstudy;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
@@ -31,6 +33,17 @@ public class StudyRoomListActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("chatrooms");
         fetchRooms();
+
+        // Get the user's full name from the Intent
+        String userFullName = getIntent().getStringExtra("USER_FULL_NAME");
+
+        roomListView.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedRoom = roomList.get(position);
+            Intent intent = new Intent(StudyRoomListActivity.this, ChatActivity.class);
+            intent.putExtra("ROOM_NAME", selectedRoom);
+            intent.putExtra("USER_FULL_NAME", userFullName); // Pass the full name
+            startActivity(intent);
+        });
     }
 
     private void fetchRooms() {

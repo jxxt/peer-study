@@ -36,6 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, StudyRoomListActivity.class);
+                intent.putExtra("USER_FULL_NAME", userName); // Pass the user's name
                 startActivity(intent);
             }
         });
