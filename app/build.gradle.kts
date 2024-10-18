@@ -41,6 +41,7 @@ dependencies {
     // Add these two dependencies for Google Sign-In
     implementation("com.google.android.gms:play-services-auth:20.5.0")
     implementation("com.google.firebase:firebase-auth:22.1.0")
+    implementation(libs.firebase.database)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
