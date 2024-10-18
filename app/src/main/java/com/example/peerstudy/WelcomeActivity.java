@@ -6,8 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -22,6 +25,15 @@ public class WelcomeActivity extends AppCompatActivity {
 
         TextView welcomeTextView = findViewById(R.id.welcomeTextView);
         welcomeTextView.setText(userName);
+
+        ImageView gifImageView = findViewById(R.id.gifImageView);
+
+        // Load and autoplay the GIF
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.hi)  // Replace 'my_gif' with your actual GIF name
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(60))) // 30 for corner radius
+                .into(gifImageView);
 
 //        ImageView profileImageView = findViewById(R.id.profileImageView);
 //        if (userPhoto != null) {

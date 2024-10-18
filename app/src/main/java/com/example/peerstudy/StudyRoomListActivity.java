@@ -2,7 +2,6 @@ package com.example.peerstudy;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
@@ -28,15 +27,19 @@ public class StudyRoomListActivity extends AppCompatActivity {
 
         roomListView = findViewById(R.id.roomListView);
         roomList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, roomList);
+
+        // Use the custom list item layout
+        adapter = new ArrayAdapter<>(this, R.layout.custom_list_item, R.id.roomText, roomList);
         roomListView.setAdapter(adapter);
 
+        // Firebase database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("chatrooms");
         fetchRooms();
 
         // Get the user's full name from the Intent
         String userFullName = getIntent().getStringExtra("USER_FULL_NAME");
 
+        // Handle clicking on room list items
         roomListView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedRoom = roomList.get(position);
             Intent intent = new Intent(StudyRoomListActivity.this, ChatActivity.class);
@@ -46,6 +49,7 @@ public class StudyRoomListActivity extends AppCompatActivity {
         });
     }
 
+    // Fetch room names from Firebase
     private void fetchRooms() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,7 +64,7 @@ public class StudyRoomListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // No error logs here
+                // Handle error if needed
             }
         });
     }
