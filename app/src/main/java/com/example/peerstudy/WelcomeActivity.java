@@ -23,13 +23,13 @@ public class WelcomeActivity extends AppCompatActivity {
         TextView welcomeTextView = findViewById(R.id.welcomeTextView);
         welcomeTextView.setText(userName);
 
-        ImageView profileImageView = findViewById(R.id.profileImageView);
-        if (userPhoto != null) {
-            Glide.with(this)
-                    .load(userPhoto)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(profileImageView);
-        }
+//        ImageView profileImageView = findViewById(R.id.profileImageView);
+//        if (userPhoto != null) {
+//            Glide.with(this)
+//                    .load(userPhoto)
+//                    .apply(RequestOptions.circleCropTransform())
+//                    .into(profileImageView);
+//        }
 
         Button joinRoomButton = findViewById(R.id.join_study_room);
         joinRoomButton.setOnClickListener(new View.OnClickListener() {
