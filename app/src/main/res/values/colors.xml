@@ -6,5 +6,7 @@
     <color name="font">#22577A</color>
     <color name="button">#38A3A5</color>
     <color name="alt_font">#C7F9CC</color>
+    <color name="red">#FF2828</color>
+    <color name="yellow">#FFC107</color>
 
 </resources>
