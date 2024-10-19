@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nova_round"
         android:text="User"
+        android:textColor="@color/font"
         android:textSize="45sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,22 +43,21 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.463"
-        android:textColor="@color/font" />
+        app:layout_constraintVertical_bias="0.463" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nova_round"
         android:text="Welcome!"
+        android:textColor="@color/font"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392"
-        android:textColor="@color/font" />
+        app:layout_constraintVertical_bias="0.392" />
 
     <Button
         android:id="@+id/profile"
