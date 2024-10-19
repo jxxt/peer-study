@@ -21,6 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         String userName = getIntent().getStringExtra("USER_NAME");
+        String userEmail = getIntent().getStringExtra("USER_EMAIL");
         String userPhoto = getIntent().getStringExtra("USER_PHOTO");
 
         TextView welcomeTextView = findViewById(R.id.welcomeTextView);
@@ -52,5 +53,28 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button leaderboardButton = findViewById(R.id.leaderboard);
+        leaderboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, LeaderboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+//        Button profileButton = findViewById(R.id.profile);
+//        profileButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(WelcomeActivity.this, ProfileActivity.class);
+//                intent.putExtra("USER_FULL_NAME", userName); // Pass the user's name
+//                intent.putExtra("USER_EMAIL", userEmail); // Pass the user's email
+//                intent.putExtra("USER_PHOTO", userPhoto); // Pass the user's photo URL
+//                startActivity(intent);
+//            }
+//        });
+
+
     }
 }
