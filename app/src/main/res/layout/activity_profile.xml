@@ -21,7 +21,7 @@
         android:id="@+id/userPhoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="ni"
+        android:contentDescription="User Photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -31,8 +31,9 @@
 
     <TextView
         android:id="@+id/userFullName"
-        android:layout_width="266dp"
-        android:layout_height="46dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nova_round"
         android:text="name"
         android:textAlignment="center"
         android:textSize="35sp"
@@ -46,8 +47,9 @@
 
     <TextView
         android:id="@+id/userEmail"
-        android:layout_width="346dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nova_round"
         android:text="email"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -57,5 +59,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.408" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nova_round"
+        android:text="Total Time Spent:"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528" />
+
+    <TextView
+        android:id="@+id/userRoomTimeSpent"
+        android:layout_width="364dp"
+        android:layout_height="298dp"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/nova_round"
+        android:text="Room: Time"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
