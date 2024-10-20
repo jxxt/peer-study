@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -19,15 +18,15 @@
 
     <ImageView
         android:id="@+id/userPhoto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:contentDescription="User Photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintVertical_bias="0.105" />
 
     <TextView
         android:id="@+id/userFullName"
@@ -36,7 +35,8 @@
         android:fontFamily="@font/nova_round"
         android:text="name"
         android:textAlignment="center"
-        android:textSize="35sp"
+        android:textColor="@color/font"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,8 @@
         android:fontFamily="@font/nova_round"
         android:text="email"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="@color/font"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
@@ -66,6 +67,7 @@
         android:fontFamily="@font/nova_round"
         android:text="Total Time Spent:"
         android:textAlignment="center"
+        android:textColor="@color/font"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
         android:fontFamily="@font/nova_round"
         android:text="Room: Time"
         android:textAlignment="center"
+        android:textColor="@color/font"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

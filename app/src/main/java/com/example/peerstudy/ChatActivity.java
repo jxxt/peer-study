@@ -102,6 +102,9 @@ public class ChatActivity extends AppCompatActivity {
                 Toast.makeText(ChatActivity.this, "Char Room left!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
     }
 
     private void startTimer() {
@@ -213,9 +216,21 @@ public class ChatActivity extends AppCompatActivity {
     // Override onBackPressed to do nothing, preventing the back button from exiting the room
     @Override
     public void onBackPressed() {
-        // Do nothing
-        super.onBackPressed();
+        Toast.makeText(this, "Please first exit the room!", Toast.LENGTH_SHORT).show();
+        // Do not call super.onBackPressed() to prevent default behavior.
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            // This allows you to detect if the app is finishing naturally.
+            return;
+        }
+        // Show a Toast when the user tries to leave using the Home button.
+        Toast.makeText(this, "Please first exit the room!", Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     protected void onDestroy() {
