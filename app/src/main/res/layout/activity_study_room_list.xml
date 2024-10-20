@@ -35,15 +35,15 @@
 
     <ListView
         android:id="@+id/roomListView"
-        android:layout_width="411dp"
-        android:layout_height="587dp"
+        android:layout_width="386dp"
+        android:layout_height="453dp"
         android:fontFamily="@font/nova_round"
         android:padding="16dp"
         android:textColor="@color/font"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784" />
+        app:layout_constraintVertical_bias="0.453" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,12 @@
 package com.example.peerstudy;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +32,8 @@ import java.util.Map;
 public class ChatActivity extends AppCompatActivity {
 
     private ListView messageListView;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> messageList;
+    private MessageAdapter adapter;
+    private ArrayList<Message> messageList;
     private DatabaseReference databaseReference;
     private DatabaseReference timeSpentRef; // Reference for storing time spent
 
@@ -56,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
         messageListView = findViewById(R.id.messageListView);
         messageList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messageList);
+        adapter = new MessageAdapter(this, messageList);
         messageListView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("chatrooms").child(roomName).child("chats");
@@ -98,13 +101,9 @@ public class ChatActivity extends AppCompatActivity {
                 stopTimer(); // Stop the timer
                 saveTimeSpent(); // Save the time spent to Firebase
                 finish();
-//                destroyActivity(); // Completely destroy the activity and go to the room list
-                Toast.makeText(ChatActivity.this, "Char Room left!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "Chat Room left!", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
     }
 
     private void startTimer() {
@@ -148,41 +147,26 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-//    private void destroyActivity() {
-//        // Navigate back to the study room list activity and completely destroy ChatActivity
-//        Intent intent = new Intent(ChatActivity.this, WelcomeActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear task stack
-//        startActivity(intent);
-//        finishAffinity(); // Completely finish and remove ChatActivity from the stack
-//    }
-
     private void loadMessages() {
         messageListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 messageList.clear(); // Clear the list before adding new messages
-                ArrayList<Message> messages = new ArrayList<>(); // Temporary list to store messages
 
                 for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                     String sender = messageSnapshot.child("sender").getValue(String.class);
                     String message = messageSnapshot.child("message").getValue(String.class);
                     long timestamp = messageSnapshot.child("timestamp").getValue(Long.class);
-                    messages.add(new Message(sender, message, timestamp)); // Add message to the temporary list
+                    messageList.add(new Message(sender, message, timestamp)); // Add message to the list
                 }
 
                 // Sort messages by timestamp in ascending order
-                Collections.sort(messages, new Comparator<Message>() {
+                Collections.sort(messageList, new Comparator<Message>() {
                     @Override
                     public int compare(Message m1, Message m2) {
                         return Long.compare(m1.timestamp, m2.timestamp);
                     }
                 });
-
-                // Create display messages without formatted time
-                for (Message msg : messages) {
-                    String displayMessage = msg.sender + ": " + msg.message; // Remove timestamp from the display message
-                    messageList.add(displayMessage);
-                }
 
                 adapter.notifyDataSetChanged(); // Notify the adapter about data changes
                 messageListView.setSelection(adapter.getCount() - 1); // Scroll to the last message
@@ -231,12 +215,44 @@ public class ChatActivity extends AppCompatActivity {
         Toast.makeText(this, "Please first exit the room!", Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (messageListener != null) {
             databaseReference.removeEventListener(messageListener); // Remove the listener when activity is destroyed
+        }
+    }
+
+    // Custom adapter to set font style and color for messages
+    private class MessageAdapter extends ArrayAdapter<Message> {
+
+        MessageAdapter(ChatActivity context, ArrayList<Message> messages) {
+            super(context, 0, messages);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            // Get the data item for this position
+            Message message = getItem(position);
+
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_chat_messages, parent, false);
+            }
+
+            // Lookup view for data population
+            TextView messageTextView = convertView.findViewById(R.id.messageTextView);
+
+            // Populate the data into the template view using the data object
+            messageTextView.setText(message.sender + ": " + message.message);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                messageTextView.setTypeface(getResources().getFont(R.font.nova_round)); // Set custom font
+            }
+            messageTextView.setTextColor(getResources().getColor(R.color.font)); // Set custom text color
+
+            // Return the completed view to render on screen
+            return convertView;
         }
     }
 

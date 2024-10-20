@@ -107,9 +107,13 @@ public class LeaderboardActivity extends AppCompatActivity {
                         String userName = user.getKey();
                         int timeSpent = user.getValue();
 
+                        // Convert seconds into minutes and seconds
+                        int minutes = timeSpent / 60;
+                        int seconds = timeSpent % 60;
+
                         // Create TextView for each user
                         TextView userTextView = new TextView(LeaderboardActivity.this);
-                        userTextView.setText(userName + ": " + timeSpent + " mins");
+                        userTextView.setText(userName + ":  " + minutes + "m " + seconds + "s");
                         userTextView.setTextSize(16);
                         leaderboardLayout.addView(userTextView);
 
