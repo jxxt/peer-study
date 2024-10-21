@@ -95,10 +95,7 @@ public class StudyRoomListActivity extends AppCompatActivity {
                     Toast.makeText(StudyRoomListActivity.this, "Room already exists", Toast.LENGTH_SHORT).show();
                 } else {
                     Map<String, Object> newRoom = new HashMap<>();
-//                    newRoom.put("name", roomName);
-//                    newRoom.put("chats", new HashMap<>());
                     newRoom.put("createdBy", userFullName);
-//                    newRoom.put("createdAt", ServerValue.TIMESTAMP);
 
                     databaseReference.child(roomName).setValue(newRoom)
                             .addOnCompleteListener(task -> {

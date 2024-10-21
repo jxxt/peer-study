@@ -36,14 +36,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(60))) // 30 for corner radius
                 .into(gifImageView);
 
-//        ImageView profileImageView = findViewById(R.id.profileImageView);
-//        if (userPhoto != null) {
-//            Glide.with(this)
-//                    .load(userPhoto)
-//                    .apply(RequestOptions.circleCropTransform())
-//                    .into(profileImageView);
-//        }
-
         Button joinRoomButton = findViewById(R.id.join_study_room);
         joinRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override

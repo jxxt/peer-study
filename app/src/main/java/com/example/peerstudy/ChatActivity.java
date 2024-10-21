@@ -35,19 +35,19 @@ public class ChatActivity extends AppCompatActivity {
     private MessageAdapter adapter;
     private ArrayList<Message> messageList;
     private DatabaseReference databaseReference;
-    private DatabaseReference timeSpentRef; // Reference for storing time spent
+    private DatabaseReference timeSpentRef;
 
     private String roomName;
     private String userFullName;
-    private long startTime;  // To store when the user entered the room
-    private long timeSpentInRoom; // To store total time spent
+    private long startTime;
+    private long timeSpentInRoom;
 
     private Handler handler = new Handler();
     private Runnable timerRunnable;
-    private int elapsedTime = 0; // Track elapsed time in seconds
+    private int elapsedTime = 0;
 
     private TextView timerTextView;
-    private ValueEventListener messageListener; // Global reference for message listener
+    private ValueEventListener messageListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class ChatActivity extends AppCompatActivity {
                 String message = messageInput.getText().toString().trim();
                 if (!message.isEmpty()) {
                     sendMessage(message);
-                    messageInput.setText(""); // Clear the input field
+                    messageInput.setText("");
                 } else {
                     Toast.makeText(ChatActivity.this, "Please enter a message", Toast.LENGTH_SHORT).show();
                 }
@@ -98,8 +98,8 @@ public class ChatActivity extends AppCompatActivity {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopTimer(); // Stop the timer
-                saveTimeSpent(); // Save the time spent to Firebase
+                stopTimer();
+                saveTimeSpent();
                 finish();
                 Toast.makeText(ChatActivity.this, "Chat Room left!", Toast.LENGTH_SHORT).show();
             }
@@ -107,14 +107,14 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        startTime = System.currentTimeMillis(); // Mark the time user joined the room
+        startTime = System.currentTimeMillis();
 
         timerRunnable = new Runnable() {
             @Override
             public void run() {
-                elapsedTime++;  // Increase time by 1 second
+                elapsedTime++;
                 timerTextView.setText(elapsedTime + " seconds");
-                handler.postDelayed(this, 1000); // Repeat every second
+                handler.postDelayed(this, 1000);
             }
         };
 
@@ -122,9 +122,9 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void stopTimer() {
-        handler.removeCallbacks(timerRunnable); // Stop updating the timer
+        handler.removeCallbacks(timerRunnable);
         long endTime = System.currentTimeMillis();
-        timeSpentInRoom = (endTime - startTime) / 1000; // Calculate time spent in seconds
+        timeSpentInRoom = (endTime - startTime) / 1000;
     }
 
     private void saveTimeSpent() {
@@ -133,11 +133,11 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long previousTimeSpent = 0;
                 if (dataSnapshot.exists()) {
-                    previousTimeSpent = dataSnapshot.getValue(Long.class); // Get the previous time spent
+                    previousTimeSpent = dataSnapshot.getValue(Long.class);
                 }
 
-                long updatedTimeSpent = previousTimeSpent + timeSpentInRoom; // Add current session time to previous time
-                timeSpentRef.setValue(updatedTimeSpent); // Update Firebase with the new total time
+                long updatedTimeSpent = previousTimeSpent + timeSpentInRoom;
+                timeSpentRef.setValue(updatedTimeSpent);
             }
 
             @Override
@@ -151,16 +151,15 @@ public class ChatActivity extends AppCompatActivity {
         messageListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                messageList.clear(); // Clear the list before adding new messages
+                messageList.clear();
 
                 for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                     String sender = messageSnapshot.child("sender").getValue(String.class);
                     String message = messageSnapshot.child("message").getValue(String.class);
                     long timestamp = messageSnapshot.child("timestamp").getValue(Long.class);
-                    messageList.add(new Message(sender, message, timestamp)); // Add message to the list
+                    messageList.add(new Message(sender, message, timestamp));
                 }
 
-                // Sort messages by timestamp in ascending order
                 Collections.sort(messageList, new Comparator<Message>() {
                     @Override
                     public int compare(Message m1, Message m2) {
@@ -168,8 +167,8 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
 
-                adapter.notifyDataSetChanged(); // Notify the adapter about data changes
-                messageListView.setSelection(adapter.getCount() - 1); // Scroll to the last message
+                adapter.notifyDataSetChanged();
+                messageListView.setSelection(adapter.getCount() - 1);
             }
 
             @Override
@@ -178,18 +177,17 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        databaseReference.addValueEventListener(messageListener); // Attach the listener
+        databaseReference.addValueEventListener(messageListener);
     }
 
     private void sendMessage(String message) {
-        long timestamp = System.currentTimeMillis(); // Get current timestamp
-        String messageId = databaseReference.push().getKey(); // Create a unique key for the message
+        long timestamp = System.currentTimeMillis();
+        String messageId = databaseReference.push().getKey();
 
-        // Create a message object with sender, message, and timestamp
         Map<String, Object> messageData = new HashMap<>();
-        messageData.put("sender", userFullName); // Use user's full name
+        messageData.put("sender", userFullName);
         messageData.put("message", message);
-        messageData.put("timestamp", timestamp); // Save the current timestamp
+        messageData.put("timestamp", timestamp);
 
         // Save message to Firebase
         if (messageId != null) {
@@ -200,15 +198,14 @@ public class ChatActivity extends AppCompatActivity {
     // Override onBackPressed to do nothing, preventing the back button from exiting the room
     @Override
     public void onBackPressed() {
+//        super.onBackPressed();
         Toast.makeText(this, "Please first exit the room!", Toast.LENGTH_SHORT).show();
-        // Do not call super.onBackPressed() to prevent default behavior.
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         if (isFinishing()) {
-            // This allows you to detect if the app is finishing naturally.
             return;
         }
         // Show a Toast when the user tries to leave using the Home button.
